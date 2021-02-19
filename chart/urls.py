@@ -3,5 +3,6 @@ from . import views
 app_name = 'chart'
 
 urlpatterns = [
-    path('', views.view_create)
+    path('create/', views.view_create, name = 'create'),
+    path('show/', views.view_show, name = 'show'),
 ]

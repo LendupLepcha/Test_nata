@@ -1,6 +1,7 @@
 from django.db import models
 
 class Zodiac(models.Model):
+    entry_time = models.DateTimeField()
     name = models.CharField(max_length=100)
     datetime = models.DateTimeField()
     point = models.CharField(max_length=100)
@@ -10,6 +11,7 @@ class Zodiac(models.Model):
     RA = models.FloatField()
 
 class Aspects(models.Model):
+    entry_time = models.DateTimeField()
     name = models.CharField(max_length=100)
     datetime = models.DateTimeField()
     body1 = models.CharField(max_length=100)
@@ -19,6 +21,7 @@ class Aspects(models.Model):
     degree = models.FloatField()
 
 class User_info(models.Model):
+    entry_time = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=100)
     year = models.IntegerField()
     month = models.IntegerField()

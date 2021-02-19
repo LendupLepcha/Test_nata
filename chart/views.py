@@ -12,7 +12,7 @@ def view_create(request):
             instance = form.save(commit=False)
             # instance.author = request.user
             global e_time
-            e_time = instance.__class__.objects.name
+            e_time = instance.__class__.objects
             instance.save()
             return redirect('chart:show')
     else:
@@ -21,6 +21,6 @@ def view_create(request):
 
 def view_show(request):
     if e_time != 0:
-        return render(request, 'chart/show', {'e_time': e_time})
+        return render(request, 'chart/show.html', {'e_time': e_time})
     else:
          return HttpResponse('No e_time found')

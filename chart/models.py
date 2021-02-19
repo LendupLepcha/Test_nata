@@ -30,3 +30,5 @@ class User_info(models.Model):
     minute =models.IntegerField()
     latitude = models.FloatField()
     longitude = models.FloatField()
+    natal_chart = models.ImageField(default='default.png', blank=True)
+    aspect_grid = models.ImageField(default='default.png', blank=True)

@@ -29,6 +29,7 @@ class Aspects(models.Model):
 class User_info(models.Model):
     entry_time = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=100)
+    datetime = models.CharField(max_length=100)
     year = models.IntegerField()
     month = models.IntegerField()
     day = models.IntegerField()

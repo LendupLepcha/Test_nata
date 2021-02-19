@@ -6,13 +6,14 @@ from .models import Zodiac, Aspects
 
 
 def view_create(request):
+    global e_time
     if request.method == 'POST':
         form = forms.TakeInput(request.POST, request.FILES)
         if form.is_valid():
             instance = form.save(commit=False)
             # instance.author = request.user
             global e_time
-            e_time = instance.__class__.objects
+            e_time = form.save(commit=False)
             instance.save()
             return redirect('chart:show')
     else:

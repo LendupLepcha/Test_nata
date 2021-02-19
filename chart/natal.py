@@ -180,20 +180,20 @@ def locate_arrow(angle,image,p_name,inner=True):
 
 
 
-def get_angles():
-    print('Enter Date and Time')
-    y = int(input('Year: '))
-    m = int(input('month: '))
-    d = int(input('day: '))
-    h = int(input('hour: '))
-    mins = int(input('minute:'))
-    sec = int(input('second: '))
-    tx = ts.utc(y, m, d, h, mins, sec)
+def get_angles(y, m, d, h, mins, lat, lon):
+    # print('Enter Date and Time')
+    # y = int(input('Year: '))
+    # m = int(input('month: '))
+    # d = int(input('day: '))
+    # h = int(input('hour: '))
+    # mins = int(input('minute:'))
+    # sec = int(input('second: '))
+    tx = ts.utc(y, m, d, h, mins)
     tsp = [ts.utc(y, m, d), ts.utc(y, m, d+1)]
     print('Date : ', tx.utc_jpl())
     print('Enter Location')
-    lat = float(input('Latitude:'))
-    lon = float(input('Longitude:'))
+    # lat = float(input('Latitude:'))
+    # lon = float(input('Longitude:'))
     coordinates = wgs84.latlon( lat, lon)
     location = earth + coordinates
     gg = location.at(tx)
@@ -254,7 +254,7 @@ def aspect_grid(row, p_names):
                     diff = diff - 350
                 s = 0
             if(s == -1):
-                grid[i][j] = -1;
+                grid[i][j] = -1
             else:
                 a = diff - s
                 if(a < 0):
@@ -378,7 +378,7 @@ def show_report(row, As, grid, t):
             elif(angle > 330 or angle < 30):
                 for q in house:
                     if house[q][0] > 330 and house[q][1]<30:
-                        break;
+                        break
                 h = q
         points.append([i, z, d, h, angle])  
 #     pointr = pd.DataFrame(points, columns=['point', 'zodiac', 'zodiac_longitude', 'house', 'RA'])
@@ -409,19 +409,21 @@ def draw_chart(t, rows, tsp):
     grid_image=copy.deepcopy(grid_original)
     
     inner_s = True
-#     print(Planet_names)
+    # print(Planet_names)
     
-    # for i, j in zip(row, Planet_names) :
-    #     inner_s = check_row(i, j, row)
-    #     image = locate_arrow(i, image, p_name = j, inner = inner_s)
-    # print('...2')
-    # As, image = houses(image, t, tsp)
+    for i, j in zip(row, Planet_names) :
+        inner_s = check_row(i, j, row)
+        image = locate_arrow(i, image, p_name = j, inner = inner_s)
+    print('...2')
+    As, image = houses(image, t, tsp)
     print('...3')
     grid = aspect_grid(row, Planet_names)
     grid_image = draw_grid(row, grid, grid_image)
     print('...4')
-    point, aspect = show_report(row, As, grid, t)
+    point, aspect = show_report(row, As, grid, t)  #As
     print('...5')
+    # cv.imwrite('images/natal_chart.jpg', image)
+    # cv.imwrite('images/aspect_grid.jpg', grid_image)
 #     print(point)
 #     print(aspect)
     return point, aspect

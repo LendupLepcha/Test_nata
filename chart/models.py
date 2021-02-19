@@ -21,7 +21,7 @@ class Aspects(models.Model):
     body1 = models.CharField(max_length=100)
     body2 = models.CharField(max_length=100)
     shape = models.IntegerField()
-    degree_type = models.FloatField()
+    degree_type = models.CharField(max_length=20)
     degree = models.FloatField()
     lat = models.FloatField()
     lon = models.FloatField()

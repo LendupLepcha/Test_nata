@@ -361,7 +361,7 @@ def show_report(row, As, grid, t):
         houses[i+1] = [langle, hangle]
     house = pd.DataFrame(houses)
 #     zodiac = pd.DataFrame(zodiacs)
-    planet['Ascendent'] = As
+    planet['Ascendant'] = As
     points = []
     for i in planet:
         angle = planet[i][0]
@@ -377,11 +377,11 @@ def show_report(row, As, grid, t):
                 
             if(angle >= house[k][0] and angle < house[k][1]):
                 h = k
-            elif(angle > 330 or angle < 30):
+            elif(angle >= 330 or angle < 30):
                 for q in house:
-                    if house[q][0] > 330 and house[q][1]<30:
+                    if house[q][0] >= 330 and house[q][1]<30:
+                        h = q
                         break
-                h = q
         points.append([i, z, d, h, angle])  
 #     pointr = pd.DataFrame(points, columns=['point', 'zodiac', 'zodiac_longitude', 'house', 'RA'])
     aspect_report = []

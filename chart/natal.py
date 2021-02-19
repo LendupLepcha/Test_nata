@@ -16,9 +16,9 @@ from termcolor import colored, cprint
 
 
 
-img = cv.imread('images/chart_frame_equal_house.jpg', 0)
+img = cv.imread('static/chart_frame_equal_house.jpg', 0)
 image_original=copy.deepcopy(img)
-grid_img = cv.imread('images/aspect_grid_frame_withceres.jpg', 0)
+grid_img = cv.imread('static/aspect_grid_frame_withceres.jpg', 0)
 grid_original=copy.deepcopy(grid_img)
 font = cv.FONT_HERSHEY_SIMPLEX
 
@@ -135,7 +135,7 @@ def intersect_circle(angle,r):
 
 
 def insert_image(imgA, p_name, x, y):
-    local = 'images/'+p_name+'.jpg'
+    local = 'static/'+p_name+'.jpg'
     obj = cv.imread(local, 0)
     length, bredth = obj.shape
     len_half, bre_half = int(length/2), int(bredth/2)
@@ -365,6 +365,8 @@ def show_report(row, As, grid, t):
     points = []
     for i in planet:
         angle = planet[i][0]
+        if angle>=360:
+            angle = angle - 360
         d = 0
         h = '' 
         z = ''
@@ -420,10 +422,10 @@ def draw_chart(t, rows, tsp):
     grid = aspect_grid(row, Planet_names)
     grid_image = draw_grid(row, grid, grid_image)
     print('...4')
-    point, aspect = show_report(row, As, grid, t)  #As
+    point, aspect = show_report(row, 0, grid, t)  #As
     print('...5')
-    # cv.imwrite('images/natal_chart.jpg', image)
-    # cv.imwrite('images/aspect_grid.jpg', grid_image)
+    cv.imwrite('static/natal_chart.jpg', image)
+    cv.imwrite('static/aspect_grid.jpg', grid_image)
 #     print(point)
 #     print(aspect)
     return point, aspect

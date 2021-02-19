@@ -24,6 +24,7 @@ def view_show(request):
     if e_u != 0:
         t, row, tsp = nt.get_angles(e_u.year, e_u.month, e_u.day, e_u.hour, e_u.minute, e_u.latitude, e_u.longitude)
         point,aspect = nt.draw_chart(t, row, tsp)
-        return render(request, 'chart/show.html', {'aspect': aspect})
+        
+        return render(request, 'chart/show.html', {'aspect': aspect, 'point':point})
     else:
          return HttpResponse('No e_u found')

@@ -10,8 +10,8 @@ class Zodiac(models.Model):
     z_longitude = models.FloatField()
     house = models.IntegerField()
     RA = models.FloatField()
-    lat = models.FloatField(blank=True)
-    lon = models.FloatField(blank=True)
+    lat = models.FloatField()
+    lon = models.FloatField()
 
 class Aspects(models.Model):
     entry_time = models.DateTimeField()
@@ -23,8 +23,8 @@ class Aspects(models.Model):
     shape = models.IntegerField()
     degree_type = models.FloatField()
     degree = models.FloatField()
-    lat = models.FloatField(blank=True)
-    lon = models.FloatField(blank=True)
+    lat = models.FloatField()
+    lon = models.FloatField()
 
 class User_info(models.Model):
     entry_time = models.DateTimeField(auto_now_add=True)

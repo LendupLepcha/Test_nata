@@ -382,6 +382,8 @@ def show_report(row, As, grid, t):
                     if house[q][0] >= 330 and house[q][1]<30:
                         h = q
                         break
+        if( i == 'Ascendent'):
+            h = 1
         points.append([i, z, d, h, angle])  
 #     pointr = pd.DataFrame(points, columns=['point', 'zodiac', 'zodiac_longitude', 'house', 'RA'])
     aspect_report = []

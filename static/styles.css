@@ -1,3 +1,5 @@
 body{
-    background: red;
+    background-image : url(/static/background.jpg);
+    background-color: #0f121f;
+    color: #fff;
 }

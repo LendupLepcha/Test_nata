@@ -360,10 +360,16 @@ def show_report(row, As, grid, t):
             hangle = hangle - 360
         houses[i+1] = [langle, hangle]
     house = pd.DataFrame(houses)
-#     zodiac = pd.DataFrame(zodiacs)
+    # zodiac = pd.DataFrame(zodiacs)
     planet.insert(0, "Ascendant", [As], True) 
     # planet['Ascendant'] = As
     points = []
+    # for zs in zodiac:
+    #     if(angle >= zodiac[j][0] and angle < zodiac[j][1]):
+    #             de = angle - zodiac[j][0]
+    #             zz = zs 
+    # points.append(['Ascendant', zz, de, 1, As])
+
     for i in planet:
         angle = planet[i][0]
         if angle>=360:
@@ -425,7 +431,7 @@ def draw_chart(t, rows, tsp):
     grid = aspect_grid(row, Planet_names)
     grid_image = draw_grid(row, grid, grid_image)
     print('...4')
-    point, aspect = show_report(row, 0, grid, t)  #As
+    point, aspect = show_report(row, As, grid, t)  #As
     print('...5')
     cv.imwrite('static/natal_chart.jpg', image)
     cv.imwrite('static/aspect_grid.jpg', grid_image)

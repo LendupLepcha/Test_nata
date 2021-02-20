@@ -361,7 +361,8 @@ def show_report(row, As, grid, t):
         houses[i+1] = [langle, hangle]
     house = pd.DataFrame(houses)
 #     zodiac = pd.DataFrame(zodiacs)
-    planet['Ascendant'] = As
+    planet.insert(0, "Ascendant", [As], True) 
+    # planet['Ascendant'] = As
     points = []
     for i in planet:
         angle = planet[i][0]

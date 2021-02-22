@@ -2,39 +2,58 @@
 
 {% block content %}
 <h1>Results</h1>
-    <img src="/static/aspect_grid.jpg" >
-    <img src="/static/natal_chart.jpg" >
-    <table>   
-        <tr>
-            <th>Body1</th>
-            <th>Body2</th>
-            <th>Shape</th>
-            <th>DegreeType</th>
-            <th>Degree</th>
-        </tr>
-        {% for a in aspect %}
-        <tr>
-            {% for i in a %}
-                <td>{{i}}</td>
+    <h2>DateTime : {{time}}</h2>
+    <h2>Location: {{lat}} <input class='latitude' value="N" id="latitude">, {{lon}} <input class='longitude' value="E" id="longitude"> 
+    </h2>
+
+    <div class="images">
+        <figure  >
+            <img src="/static/aspect_grid.jpg" class="aspect_grid">
+            <figcaption>Aspect Grid</figcaption>
+        </figure>
+        <figure >
+            <img src="/static/natal_chart.jpg" class="natal_chart">
+            <figcaption>Natal Chart</figcaption>
+        </figure>
+        
+        
+    </div>
+    <div class= "result_tables">
+        <table class="points_report">  
+            <caption style="text-align:center">Points Report</caption> 
+            <tr>
+                <th>Body1</th>
+                <th>Body2</th>
+                <th>Shape</th>
+                <th>DegreeType</th>
+                <th>Degree</th>
+            </tr>
+            {% for a in aspect %}
+            <tr>
+                {% for i in a %}
+                    <td>{{i}}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}    
+        </table>
+        <table class="aspect_grid_report">
+            <caption style="text-align:center">Aspect Grid Report</caption> 
+            <tr>
+                <th>Point</th>
+                <th>Zodiac</th>
+                <th>Z_Latitude</th>
+                <th>House</th>
+                <th>RA</th>
+            </tr>
+            {% for p in point %}
+            <tr>
+                {% for i in p %}
+                    <td>{{i}}</td>
+                {% endfor %}
+            </tr>
             {% endfor %}
-        </tr>
-        {% endfor %}    
-    </table>
-    <table>
-        <tr>
-            <th>Point</th>
-            <th>Zodiac</th>
-            <th>Z_Latitude</th>
-            <th>House</th>
-            <th>RA</th>
-        </tr>
-        {% for p in point %}
-        <tr>
-            {% for i in p %}
-                <td>{{i}}</td>
-            {% endfor %}
-        </tr>
-        {% endfor %}
-    </table>
+        </table>
+    </div>
+    
     
 {% endblock %}

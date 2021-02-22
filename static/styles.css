@@ -68,7 +68,3 @@ figcaption{
     text-align:center;
     font-style:italic;
 }
-.coordinates{
-    display: block;
-    grid-template-columns: auto;
-}

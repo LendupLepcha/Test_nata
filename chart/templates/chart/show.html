@@ -3,9 +3,11 @@
 {% block content %}
 <h1>Results</h1>
     <h2>DateTime : {{time}}</h2>
-    <h2>Location: {{lat}} <text class="latitude">N</text>, {{lon}} <text class="longitude">E</text> 
+    
+    <h2>Location: {{lat}} <text class="latitude" id="latitude">N</text>, {{lon}} <text class="longitude" id="longitude">E</text> 
     </h2>
-
+    <script src="/static/ditections.js"></script>
+    
     <div class="images">
         <figure  >
             <img src="/static/aspect_grid.jpg" class="aspect_grid">

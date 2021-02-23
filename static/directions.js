@@ -1,25 +1,25 @@
-var lat = document.getElementById("latitude").value;
-lat=parseFloat(lat);
+function codeAddress() {
+    var lat = document.getElementById("lat_num").innerHTML;
+    lat=parseFloat(lat);
 
-var lon = document.getElementById("longitude").value;
-lon=parseFloat(lon);
-
-function directions(){
+    var lon = document.getElementById("lon_num").innerHTML;
+    lon=parseFloat(lon);
     var H;
     var V;
-
     if(lat<0){
-        H = 'S'
+        document.getElementById('latitude').innerHTML = "S";
+        document.getElementById('lat_num').innerHTML = Math.abs(lat);
     }else{
-        H = 'N'
+        document.getElementById('latitude').innerHTML = "N";
+        
     }
-
     if(lon<0){
-        V = 'W'
+        document.getElementById('longitude').innerHTML = "W";
+        document.getElementById('lon_num').innerHTML = Math.abs(lon);
     }else{
-        v = 'E'
+        document.getElementById('longitude').innerHTML = "E";
     }
-    document.getElementById('latitude').innerHTML = H;
-    document.getElementById('longitude').innerHTML = V;
+    
 }
-window.onload = directions;
+window.onload = codeAddress;
+

@@ -6,7 +6,7 @@ from . import natal as nt
 ts = nt.load.timescale()
 
 def view_create(request):
-    global e_u
+    global e_u, time_e, point, aspect
     if request.method == 'POST':
         form = forms.TakeInput(request.POST, request.FILES)
         if form.is_valid():
@@ -14,7 +14,7 @@ def view_create(request):
             time = ts.utc(instance.year, instance.month, instance.day, instance.hour, instance.minute)
             instance.datetime = time.utc_jpl()
             # instance.author = request.user
-            global e_u, time_e, point, aspect
+            
             e_u = form.save(commit=False)
             instance.save()
             if e_u != 0:
@@ -58,6 +58,6 @@ def view_show(request):
     # ts = nt.load.timescale()
     if e_u != 0:
        
-        return render(request, 'chart/show.html', {'aspect': aspect, 'point':point, 'time':time_e, 'lat':e_u.latitude, 'lon':e_u.longitude})
+        return render(request, 'chart/show.html', {'name':e_u.name,'aspect': aspect, 'point':point, 'time':time_e, 'lat':e_u.latitude, 'lon':e_u.longitude})
     else:
          return HttpResponse('No e_u found')

@@ -11,7 +11,7 @@ from skyfield.data import mpc
 from skyfield.constants import GM_SUN_Pitjeva_2005_km3_s2 as GM_SUN
 from skyfield.units import Distance
 from skyfield.almanac import find_discrete, sunrise_sunset
-from termcolor import colored, cprint
+
 # # Global variables
 
 

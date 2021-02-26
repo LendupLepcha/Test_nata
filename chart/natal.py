@@ -6,7 +6,7 @@ import math
 import pandas as pd
 import cv2 as cv
 import copy
-from skyfield.api import E, N, W, wgs84, load, Star
+from skyfield.api import E, N, W, wgs84, load_file, Star
 from skyfield.data import mpc
 from skyfield.constants import GM_SUN_Pitjeva_2005_km3_s2 as GM_SUN
 from skyfield.units import Distance
@@ -69,7 +69,7 @@ zodiacs = {
         'Pisces': [330, 360]
 }
 zodiac = pd.DataFrame(zodiacs)
-eph = load('de421.bsp')
+eph = load_file('/media/de421.bsp')
 
 
 
@@ -85,7 +85,7 @@ for i, j in zip(planets, Planet_names[:-1]):
 
 
 
-with load.open('MPCORB.excerpt.DAT') as f:
+with load.open('/media/MPCORB.excerpt.DAT') as f:
     minor_planets = mpc.load_mpcorb_dataframe(f)
 row_ceres=minor_planets.iloc[0]
 sun = eph['sun']

@@ -52,11 +52,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'natal_chart_app.urls'
-
+SETTINGS_PATH = os.path.dirname(os.path.dirname(__file__))
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [os.path.join(SETTINGS_PATH, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -123,16 +123,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'static'), 
-# )
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'), 
+)
 
-STATIC_ROOT = '/projects/natalchart/site/public/static'
+# STATIC_ROOT = '/projects/natalchart/site/public/static'
 
 
 MEDIA_URL = '/media/'
 
-# MEDIA_ROOT = (
-#     os.path.join(BASE_DIR, 'media')
-# )
-MEDIA_ROOT = '/projects/natalchart/site/public/media'
+MEDIA_ROOT = (
+    os.path.join(BASE_DIR, 'media')
+)
+# MEDIA_ROOT = '/projects/natalchart/site/public/media'

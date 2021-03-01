@@ -14,12 +14,13 @@ def view_create(request):
             time = ts.utc(instance.year, instance.month, instance.day, instance.hour, instance.minute)
             instance.datetime = time.utc_jpl()
             # instance.author = request.user
-            
-            e_u = form.save(commit=False)
             instance.save()
+            e_u = form.save(commit=False)
+            
             if e_u != 0:
                 t, row, tsp = nt.get_angles(e_u.year, e_u.month, e_u.day, e_u.hour, e_u.minute, e_u.latitude, e_u.longitude)
                 point,aspect = nt.draw_chart(t, row, tsp)
+                
                 time_e = t.utc_jpl()
                 
                 for i in aspect:
@@ -58,6 +59,6 @@ def view_show(request):
     # ts = nt.load.timescale()
     if e_u != 0:
        
-        return render(request, 'chart/show.html', {'name':e_u.name,'aspect': aspect, 'point':point, 'time':time_e, 'lat':e_u.latitude, 'lon':e_u.longitude})
+        return render(request, 'chart/show.html', {'name':e_u.name,'aspect': aspect, 'point':point, 'time':time_e, 'lat':e_u.latitude, 'lon':e_u.longitude} )
     else:
          return HttpResponse('No e_u found')

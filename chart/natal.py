@@ -12,16 +12,40 @@ from skyfield.constants import GM_SUN_Pitjeva_2005_km3_s2 as GM_SUN
 from skyfield.units import Distance
 from skyfield.almanac import find_discrete, sunrise_sunset
 
+from .models import Stat_Images
 # # Global variables
 
+si = Stat_Images.objects.get(ids = 100)
 
 
-img = cv.imread('static/chart_frame_equal_house.jpg', 0)
+# img = cv.imread('static/chart_frame_equal_house.jpg', 0)
+img = si.chart_frame
+print('here')
+print( img)
+
 image_original=copy.deepcopy(img)
-grid_img = cv.imread('static/aspect_grid_frame_withceres.jpg', 0)
+# grid_img = cv.imread('static/aspect_grid_frame_withceres.jpg', 0)
+grid_img = si.aspact_frame
 grid_original=copy.deepcopy(grid_img)
 font = cv.FONT_HERSHEY_SIMPLEX
 
+local = {
+    'sun' : si.sun,
+    'moon' : si.moon,
+    'mercury' : si.mercury,
+    'venus' : si.venus,
+    'mars' : si.mars,
+    'jupiter' : si.jupiter,
+    'saturn' : si.saturn,
+    'uranus' : si.uranus,
+    'neptune' : si.neptune,
+    'pluto' : si.pluto,
+    'conjunction' : si.conjunction,
+    'opposition' : si.opposition,
+    'square' : si.square,
+    'sextile' : si.sextile,
+    'trine' : si.trine
+}
 
 
 
@@ -135,8 +159,10 @@ def intersect_circle(angle,r):
 
 
 def insert_image(imgA, p_name, x, y):
-    local = 'static/'+p_name+'.jpg'
-    obj = cv.imread(local, 0)
+    # local = 'static/'+p_name+'.jpg'
+
+    # obj = cv.imread(local, 0)
+    obj = local[p_name]
     length, bredth = obj.shape
     len_half, bre_half = int(length/2), int(bredth/2)
     p = q = 0

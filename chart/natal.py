@@ -12,61 +12,61 @@ from skyfield.constants import GM_SUN_Pitjeva_2005_km3_s2 as GM_SUN
 from skyfield.units import Distance
 from skyfield.almanac import find_discrete, sunrise_sunset
 
-from .models import Stat_Images
-# Global variables
+# from .models import Stat_Images
+# # Global variables
 
-si = Stat_Images.objects.get(ids = 100)
+# si = Stat_Images.objects.get(ids = 100)
 
 
-# img = cv.imread('static/chart_frame_equal_house.jpg', 0 )
-ims = np.asarray(bytearray(si.chart_frame.read()), dtype="uint8")
-img = cv.imdecode(ims, 0)
-# img = cv.imread(si.chart_frame, 0)
-# print('here')
-# print(img)
-image_original=copy.deepcopy(img)
-# grid_img = cv.imread('static/aspect_grid_frame_withceres.jpg', 0)
-ims = np.asarray(bytearray(si.aspact_frame.read()), dtype="uint8")
-grid_img = cv.imdecode(ims, 0)
-# grid_img = si.aspact_frame
-grid_original=copy.deepcopy(grid_img)
+# # img = cv.imread('static/chart_frame_equal_house.jpg', 0 )
+# ims = np.asarray(bytearray(si.chart_frame.read()), dtype="uint8")
+# img = cv.imdecode(ims, 0)
+# # img = cv.imread(si.chart_frame, 0)
+# # print('here')
+# # print(img)
+# image_original=copy.deepcopy(img)
+# # grid_img = cv.imread('static/aspect_grid_frame_withceres.jpg', 0)
+# ims = np.asarray(bytearray(si.aspact_frame.read()), dtype="uint8")
+# grid_img = cv.imdecode(ims, 0)
+# # grid_img = si.aspact_frame
+# grid_original=copy.deepcopy(grid_img)
 font = cv.FONT_HERSHEY_SIMPLEX
 
 
-local = {}
+# local = {}
 
-ims = np.asarray(bytearray(si.sun.read()), dtype="uint8")
-local['sun'] = cv.imdecode(ims, 0)
-ims = np.asarray(bytearray(si.moon.read()), dtype="uint8")
-local['moon'] = cv.imdecode(ims, 0)
-ims = np.asarray(bytearray(si.mercury.read()), dtype="uint8")
-local['mercury'] = cv.imdecode(ims, 0)
-ims = np.asarray(bytearray(si.venus.read()), dtype="uint8")
-local['venus'] = cv.imdecode(ims, 0)
-ims = np.asarray(bytearray(si.mars.read()), dtype="uint8")
-local['mars'] = cv.imdecode(ims, 0)
-ims = np.asarray(bytearray(si.jupiter.read()), dtype="uint8")
-local['jupiter'] = cv.imdecode(ims, 0)
-ims = np.asarray(bytearray(si.saturn.read()), dtype="uint8")
-local['saturn'] = cv.imdecode(ims, 0)
-ims = np.asarray(bytearray(si.uranus.read()), dtype="uint8")
-local['uranus'] = cv.imdecode(ims, 0)
-ims = np.asarray(bytearray(si.neptune.read()), dtype="uint8")
-local['neptune'] = cv.imdecode(ims, 0)
-ims = np.asarray(bytearray(si.pluto.read()), dtype="uint8")
-local['pluto'] = cv.imdecode(ims, 0)
-ims = np.asarray(bytearray(si.ceres.read()), dtype="uint8")
-local['ceres'] = cv.imdecode(ims, 0)
-ims = np.asarray(bytearray(si.conjunction.read()), dtype="uint8")
-local['conjunction'] = cv.imdecode(ims, 0)
-ims = np.asarray(bytearray(si.opposition.read()), dtype="uint8")
-local['opposition'] = cv.imdecode(ims, 0)
-ims = np.asarray(bytearray(si.square.read()), dtype="uint8")
-local['square'] = cv.imdecode(ims, 0)
-ims = np.asarray(bytearray(si.sextile.read()), dtype="uint8")
-local['sextile'] = cv.imdecode(ims, 0)
-ims = np.asarray(bytearray(si.trine.read()), dtype="uint8")
-local['trine'] = cv.imdecode(ims, 0)
+# ims = np.asarray(bytearray(si.sun.read()), dtype="uint8")
+# local['sun'] = cv.imdecode(ims, 0)
+# ims = np.asarray(bytearray(si.moon.read()), dtype="uint8")
+# local['moon'] = cv.imdecode(ims, 0)
+# ims = np.asarray(bytearray(si.mercury.read()), dtype="uint8")
+# local['mercury'] = cv.imdecode(ims, 0)
+# ims = np.asarray(bytearray(si.venus.read()), dtype="uint8")
+# local['venus'] = cv.imdecode(ims, 0)
+# ims = np.asarray(bytearray(si.mars.read()), dtype="uint8")
+# local['mars'] = cv.imdecode(ims, 0)
+# ims = np.asarray(bytearray(si.jupiter.read()), dtype="uint8")
+# local['jupiter'] = cv.imdecode(ims, 0)
+# ims = np.asarray(bytearray(si.saturn.read()), dtype="uint8")
+# local['saturn'] = cv.imdecode(ims, 0)
+# ims = np.asarray(bytearray(si.uranus.read()), dtype="uint8")
+# local['uranus'] = cv.imdecode(ims, 0)
+# ims = np.asarray(bytearray(si.neptune.read()), dtype="uint8")
+# local['neptune'] = cv.imdecode(ims, 0)
+# ims = np.asarray(bytearray(si.pluto.read()), dtype="uint8")
+# local['pluto'] = cv.imdecode(ims, 0)
+# ims = np.asarray(bytearray(si.ceres.read()), dtype="uint8")
+# local['ceres'] = cv.imdecode(ims, 0)
+# ims = np.asarray(bytearray(si.conjunction.read()), dtype="uint8")
+# local['conjunction'] = cv.imdecode(ims, 0)
+# ims = np.asarray(bytearray(si.opposition.read()), dtype="uint8")
+# local['opposition'] = cv.imdecode(ims, 0)
+# ims = np.asarray(bytearray(si.square.read()), dtype="uint8")
+# local['square'] = cv.imdecode(ims, 0)
+# ims = np.asarray(bytearray(si.sextile.read()), dtype="uint8")
+# local['sextile'] = cv.imdecode(ims, 0)
+# ims = np.asarray(bytearray(si.trine.read()), dtype="uint8")
+# local['trine'] = cv.imdecode(ims, 0)
 
 
 ts = load.timescale()
@@ -119,6 +119,7 @@ eph = load_file('media/de421.bsp')
 
 
 earth = eph['earth']
+# print(earth)
 coordinates = wgs84.latlon( 27.3314 , 88.6138)
 location = earth + coordinates
 # gg = gangtok.at(time_p)
@@ -453,8 +454,9 @@ def show_report(row, As, grid, t):
 
 
 
-def draw_chart(t, rows, tsp):
-
+def draw_chart(t, rows, tsp, image_original, grid_original, icons):
+    global local
+    local = icons
 #     t, rows, tsp = get_angles()
     row = rows.loc[0]
     print('...1')

@@ -454,9 +454,11 @@ def show_report(row, As, grid, t):
 
 
 
-def draw_chart(t, rows, tsp, image_original, grid_original, icons):
-    global local
-    local = icons
+def draw_chart(t, rows, tsp, images_stat):
+    global local, image_original, grid_original
+    local = images_stat
+    image_original = images_stat['chart_frame_equal_house']
+    grid_original = images_stat['aspect_grid_frame_withceres']
 #     t, rows, tsp = get_angles()
     row = rows.loc[0]
     print('...1')

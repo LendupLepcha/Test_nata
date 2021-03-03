@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from . import forms
 from .models import Zodiac, Aspects
+from django.contrib.auth.decorators import login_required
 from . import natal as nt
 ts = nt.load.timescale()
 # from .models import Stat_Images
@@ -11,7 +12,7 @@ cv = nt.cv
 file_to_read = open("media/images.pickle", "rb")
 images_stat = pickle.load(file_to_read)
 file_to_read.close()
-print(images_stat['sun'])
+# print(images_stat['sun'])
 # si = Stat_Images.objects.get(ids = 100)
 # ims = np.asarray(bytearray(si.chart_frame.read()), dtype="uint8")
 # img = cv.imdecode(ims, 0)
@@ -51,6 +52,7 @@ print(images_stat['sun'])
 # ims = np.asarray(bytearray(si.trine.read()), dtype="uint8")
 # local['trine'] = cv.imdecode(ims, 0)
 
+@login_required(login_url="/accounts/login/")
 def view_create(request):
     global e_u, time_e, point, aspect
     if request.method == 'POST':

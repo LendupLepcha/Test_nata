@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.contrib.postgres.fields import IntegerRangeField
+from django.core.validators import MinValueValidator, MaxValueValidator
 class Zodiac(models.Model):
     entry_time = models.DateTimeField()
     name = models.CharField(max_length=100)
@@ -30,11 +31,11 @@ class User_info(models.Model):
     entry_time = models.DateTimeField(auto_now_add=True)
     name = models.CharField(max_length=100)
     datetime = models.CharField(max_length=100)
-    year = models.IntegerField()
-    month = models.IntegerField()
-    day = models.IntegerField()
-    hour =  models.IntegerField()
-    minute =models.IntegerField()
+    year = models.IntegerField(validators=[MinValueValidator(1950),MaxValueValidator(2050)])
+    month = models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(12)])
+    day = models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(31)])
+    hour = models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(23)])
+    minute = models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(59)])
     latitude = models.FloatField()
     longitude = models.FloatField()
     natal_chart = models.FileField(default='default.png', blank=True)

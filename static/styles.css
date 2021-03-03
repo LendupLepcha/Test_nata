@@ -68,3 +68,9 @@ figcaption{
     text-align:center;
     font-style:italic;
 }
+.wrapper ul{
+    list-style-type:none;
+    opacity: .5;
+    margin:10px -40px;
+    color:yellow;
+}

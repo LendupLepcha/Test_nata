@@ -205,6 +205,7 @@ def locate_arrow(angle,image,p_name,inner=True):
     else:
         r, r_b, r_a = 302, 320, 324
 #     x, y = intersect_circle(angle,r)
+
     x, y = intersect_circle(angle, r) # for arrow head
     # _clock
 #     x_base, y_base = intersect_circle(angle,r_b)

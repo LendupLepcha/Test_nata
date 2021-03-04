@@ -13,5 +13,5 @@ class Search_Input(forms.Form):
     sday = forms.IntegerField()
     shour = forms.IntegerField()
     sminute = forms.IntegerField()
-    slatitude = forms.IntegerField()
-    slongitude = forms.IntegerField()
+    slatitude = forms.FloatField()
+    slongitude = forms.FloatField()

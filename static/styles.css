@@ -44,6 +44,8 @@ body{
     border-width:2px;
     border-spacing:0px;
     border-radius:1px;
+    height:200px;
+    overflow:scroll;
 
 }
 .result_tables .points_report{
@@ -53,6 +55,8 @@ body{
     border-width:2px;
     border-spacing:0px;
     border-radius:1px;
+    height:200px;
+    overflow:scroll;
 }
 
 th,td{
@@ -78,7 +82,7 @@ div.wrapper h1{
 header{
     display:grid;
     grid-template-columns:1fr 1fr;
-    padding:20px 0;
+    padding:10px 0;
 }
 nav{
     justify-self:end;
@@ -104,7 +108,7 @@ nav button{
 
 .site-form input{
     display:block;
-    padding:10px;
+    padding:5px;
 }
 .site-form label{
     display:block;
@@ -139,11 +143,35 @@ a{
 
 }
 
-.site-form input[type="submit"]{
+.site-form input[type="submit"], .search-form input[type="submit"]{
     background:#00dba0;
     border:0;
     color:#fff;
     font-size:1.2em;
     border-radius:4px;
     margin:10px 0;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%,30%);
+}
+/* <--------------------------------------------------------------------------------> */
+.search-form{
+    display:block;
+    margin-top:60px;
+    border:1px solid #00dba0;
+    padding:20px;
+    font-size:1.2em
+}
+.search-form input{
+    padding:5px;
+    margin-bottom:10px;
+
+}
+.search-form .enter-date input, .search-form .enter-time input{
+    width:100px;
+}
+.search-form p{
+    font-size:1.4em;
+    color:gray;
+    margin-bottom:10px;
 }

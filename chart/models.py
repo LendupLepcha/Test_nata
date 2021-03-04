@@ -1,9 +1,10 @@
 from django.db import models
 from django.contrib.postgres.fields import IntegerRangeField
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.contrib.auth.models import User
 class Zodiac(models.Model):
     entry_time = models.DateTimeField()
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, null= True, blank = True)
     datetime = models.CharField(max_length=100)
     # datetime = models.DateTimeField()
     point = models.CharField(max_length=100)
@@ -16,7 +17,7 @@ class Zodiac(models.Model):
 
 class Aspects(models.Model):
     entry_time = models.DateTimeField()
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, null= True, blank = True)
     datetime = models.CharField(max_length=100)
     # datetime = models.DateTimeField()
     body1 = models.CharField(max_length=100)
@@ -29,7 +30,7 @@ class Aspects(models.Model):
 
 class User_info(models.Model):
     entry_time = models.DateTimeField(auto_now_add=True)
-    name = models.CharField(max_length=100)
+    name = models.ForeignKey(User, default=None, on_delete = models.CASCADE, null= True, blank = True)
     datetime = models.CharField(max_length=100)
     year = models.IntegerField(validators=[MinValueValidator(1950),MaxValueValidator(2050)])
     month = models.IntegerField(validators=[MinValueValidator(1),MaxValueValidator(12)])

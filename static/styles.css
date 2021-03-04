@@ -10,11 +10,7 @@ body{
     padding: 10px 0;
 } */
 
-.wrapper input{
-    margin:0 0 10px  0 ;
-    display: grid;
-    grid-row: 1fr 1fr;
-}
+
 .images{
     display:grid;
     grid-template-columns:1fr 1fr;
@@ -68,9 +64,86 @@ figcaption{
     text-align:center;
     font-style:italic;
 }
-.wrapper ul{
+
+.wrapper, header{
+    max-width:960px;
+    margin:0 auto;
+}
+
+div.wrapper h1{
+    text-align:center;
+    margin:100px auto;
+    font-size:2.4em;
+}
+header{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    padding:20px 0;
+}
+nav{
+    justify-self:end;
+}
+nav li{
+    display:inline-block;
+    margin-left:20px;
+
+}
+nav button{
+    background:none;
+    color:white;
+    cursor:pointer; 
+    border:0;
+    font-size:1em;
+    
+}
+.site-form{
+    margin-top:60px;
+    border:1px solid #00dba0;
+    padding:20px;
+}
+
+.site-form input{
+    display:block;
+    padding:10px;
+}
+.site-form label{
+    display:block;
+    margin:10px 0 0 0;
+}
+
+
+a{
+    border:1px solid #00dba0;
+    padding:10px;
+    border-radius:2px;
+    color:#00dba0;
+    text-decoration: none;
+}
+.helptext, .helptext ul{
+    margin: 0 auto 20px;
+    color:#bbb;
+    font-size:0.9em;
+    display:block;
+    
+}
+.errorlist li{
+    padding:10px;
     list-style-type:none;
-    opacity: .5;
-    margin:10px -40px;
-    color:yellow;
+    border:1px solid #ff5722;
+    color:#ff5722;
+    margin:10px 0; 
+}
+
+.errorlist{
+    padding:0;
+
+}
+
+.site-form input[type="submit"]{
+    background:#00dba0;
+    border:0;
+    color:#fff;
+    font-size:1.2em;
+    border-radius:4px;
+    margin:10px 0;
 }

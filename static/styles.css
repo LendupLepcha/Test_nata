@@ -158,8 +158,8 @@ a{
     position: relative;
     left: 50%;
     transform: translate(-50%,30%);
+    cursor:pointer; 
 }
-/* <--------------------------------------------------------------------------------> */
 .search-form{
     display:block;
     margin-top:60px;

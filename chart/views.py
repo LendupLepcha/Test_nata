@@ -74,7 +74,7 @@ def view_show(request):
     else:
          return HttpResponse('No e_u found')
 
-
+@login_required(login_url="/accounts/login/")
 def view_search(request):
     if request.method == 'POST':
             return redirect('chart:search_results')

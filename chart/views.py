@@ -5,6 +5,7 @@ from .models import Zodiac, Aspects, User_info
 from django.contrib.auth.decorators import login_required
 from . import natal as nt
 ts = nt.load.timescale()
+from django.contrib import messages 
 # from .models import Stat_Images
 import pickle
 np = nt.np
@@ -25,6 +26,10 @@ def view_create(request):
             time = ts.utc(instance.year, instance.month, instance.day, instance.hour, instance.minute)
             instance.datetime = time.utc_jpl()
             # instance.author = request.user
+            check_inst = User_info.objects.filter(name=instance.name,datetime=instance.datetime,latitude=instance.latitude,longitude=instance.longitude)
+            if check_inst.exists():
+                messages.error(request, "This data is already saved in database!!")
+                return redirect('chart:create')
             instance.save()
             e_u = form.save(commit=False)
             
@@ -108,7 +113,10 @@ def view_search_results(request):
                 return render(request, 'chart/search_results.html', { 'asp':asp, 'zod':zod, 'results':sresult})
                 
             else:
-                print(sresult['time'])
-                return HttpResponse('No such input in database')
+                # print(sresult['time'])
+                messages.error(request, "NO DATA FOUND!!")
+                # return HttpResponse('No such input in database')
+                return redirect('chart:search')
     else:
-        return HttpResponse('No input given to search')
+        messages.error(request, "NO INPUT GIVEN!!")
+        return redirect('chart:search')

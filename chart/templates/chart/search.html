@@ -5,7 +5,6 @@
 
 <div class="wrapper">
     <h2 >Search data</h2>
-    
     <form action="{% url 'chart:search_results' %}" method = "POST" class="search-form">
         {% csrf_token %}
         <!-- <div class="enter-name">

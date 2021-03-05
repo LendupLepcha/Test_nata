@@ -1,3 +1,4 @@
+
 function codeAddress() {
     var lat = document.getElementById("lat_num").innerHTML;
     lat=parseFloat(lat);
@@ -22,4 +23,3 @@ function codeAddress() {
     
 }
 window.onload = codeAddress;
-

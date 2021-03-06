@@ -1,6 +1,3 @@
-
-
-
 import numpy as np
 import math
 import pandas as pd
@@ -12,67 +9,9 @@ from skyfield.constants import GM_SUN_Pitjeva_2005_km3_s2 as GM_SUN
 from skyfield.units import Distance
 from skyfield.almanac import find_discrete, sunrise_sunset
 
-# from .models import Stat_Images
-# # Global variables
-
-# si = Stat_Images.objects.get(ids = 100)
-
-
-# # img = cv.imread('static/chart_frame_equal_house.jpg', 0 )
-# ims = np.asarray(bytearray(si.chart_frame.read()), dtype="uint8")
-# img = cv.imdecode(ims, 0)
-# # img = cv.imread(si.chart_frame, 0)
-# # print('here')
-# # print(img)
-# image_original=copy.deepcopy(img)
-# # grid_img = cv.imread('static/aspect_grid_frame_withceres.jpg', 0)
-# ims = np.asarray(bytearray(si.aspact_frame.read()), dtype="uint8")
-# grid_img = cv.imdecode(ims, 0)
-# # grid_img = si.aspact_frame
-# grid_original=copy.deepcopy(grid_img)
 font = cv.FONT_HERSHEY_SIMPLEX
 
-
-# local = {}
-
-# ims = np.asarray(bytearray(si.sun.read()), dtype="uint8")
-# local['sun'] = cv.imdecode(ims, 0)
-# ims = np.asarray(bytearray(si.moon.read()), dtype="uint8")
-# local['moon'] = cv.imdecode(ims, 0)
-# ims = np.asarray(bytearray(si.mercury.read()), dtype="uint8")
-# local['mercury'] = cv.imdecode(ims, 0)
-# ims = np.asarray(bytearray(si.venus.read()), dtype="uint8")
-# local['venus'] = cv.imdecode(ims, 0)
-# ims = np.asarray(bytearray(si.mars.read()), dtype="uint8")
-# local['mars'] = cv.imdecode(ims, 0)
-# ims = np.asarray(bytearray(si.jupiter.read()), dtype="uint8")
-# local['jupiter'] = cv.imdecode(ims, 0)
-# ims = np.asarray(bytearray(si.saturn.read()), dtype="uint8")
-# local['saturn'] = cv.imdecode(ims, 0)
-# ims = np.asarray(bytearray(si.uranus.read()), dtype="uint8")
-# local['uranus'] = cv.imdecode(ims, 0)
-# ims = np.asarray(bytearray(si.neptune.read()), dtype="uint8")
-# local['neptune'] = cv.imdecode(ims, 0)
-# ims = np.asarray(bytearray(si.pluto.read()), dtype="uint8")
-# local['pluto'] = cv.imdecode(ims, 0)
-# ims = np.asarray(bytearray(si.ceres.read()), dtype="uint8")
-# local['ceres'] = cv.imdecode(ims, 0)
-# ims = np.asarray(bytearray(si.conjunction.read()), dtype="uint8")
-# local['conjunction'] = cv.imdecode(ims, 0)
-# ims = np.asarray(bytearray(si.opposition.read()), dtype="uint8")
-# local['opposition'] = cv.imdecode(ims, 0)
-# ims = np.asarray(bytearray(si.square.read()), dtype="uint8")
-# local['square'] = cv.imdecode(ims, 0)
-# ims = np.asarray(bytearray(si.sextile.read()), dtype="uint8")
-# local['sextile'] = cv.imdecode(ims, 0)
-# ims = np.asarray(bytearray(si.trine.read()), dtype="uint8")
-# local['trine'] = cv.imdecode(ims, 0)
-
-
 ts = load.timescale()
-
-
-
 planets=[
     'sun',
     'moon',
@@ -115,9 +54,6 @@ zodiacs = {
 zodiac = pd.DataFrame(zodiacs)
 eph = load_file('media/de421.bsp')
 
-
-
-
 earth = eph['earth']
 # print(earth)
 coordinates = wgs84.latlon( 27.3314 , 88.6138)
@@ -127,16 +63,11 @@ P= {}
 for i, j in zip(planets, Planet_names[:-1]):
     P[j] = eph[i]
 
-
-
-
 with load.open('media/MPCORB.excerpt.DAT') as f:
     minor_planets = mpc.load_mpcorb_dataframe(f)
 row_ceres=minor_planets.iloc[0]
 sun = eph['sun']
 ceres = sun + mpc.mpcorb_orbit(row_ceres, ts, GM_SUN)
-
-
 
 # # Draw intersect of a line and circle (Given angle from center)
 def intersect_circle(angle,r):
@@ -171,11 +102,6 @@ def intersect_circle(angle,r):
     yy = signy * math.floor(y)
     return xx,yy
 
-
-
-
-
-
 def insert_image(imgA, p_name, x, y):
     # local = 'static/'+p_name+'.jpg'
     # obj = cv.imread(local, 0)
@@ -192,11 +118,7 @@ def insert_image(imgA, p_name, x, y):
         p=p+1
     return imgA
 
-
 # # Draw arrow pointing the angle location
-
-
-
 def locate_arrow(angle,image,p_name,inner=True):
     
 #     p_name = 
@@ -221,9 +143,6 @@ def locate_arrow(angle,image,p_name,inner=True):
 
 
 # # Read angles of planets
-
-
-
 def get_angles(y, m, d, h, mins, lat, lon):
     # print('Enter Date and Time')
     # y = int(input('Year: '))
@@ -254,8 +173,6 @@ def get_angles(y, m, d, h, mins, lat, lon):
 #     print(rowpd)
     return tx, rowpd, tsp;
 
-
-
 def check_row(degree, name, row):
     a = copy.deepcopy(row)
 #     i = list(Planet_names).index(name)
@@ -270,9 +187,6 @@ def check_row(degree, name, row):
 
 
 # ## aspect_grid function
-
-
-
 def aspect_grid(row, p_names):
     grid = [[0 for i in range(len(row))] for j in range(len(row))]
     for i in range(len(row)):
@@ -308,10 +222,6 @@ def aspect_grid(row, p_names):
                 cell = [s, b, abs(a)]
                 grid[i][j] = cell
     return grid
-            
-
-
-
 
 def draw_grid(row, grid, img2):
     x = 80
@@ -339,9 +249,6 @@ def draw_grid(row, grid, img2):
 
 
 # # Calc rising sign
-
-
-
 def rising(time, tsp):
     t, y = find_discrete(tsp[0], tsp[1], sunrise_sunset(eph, coordinates))
     for i, j in zip(t, y):
@@ -359,9 +266,6 @@ def rising(time, tsp):
 
 
 # # Draw houses
-
-
-
 def houses(image, t, tsp):
     As = rising(t, tsp)
     
@@ -388,9 +292,6 @@ def houses(image, t, tsp):
 
 
 # # Chart point Report
-
-
-
 def show_report(row, As, grid, t):
     planet = row.to_frame()
     planet = planet.T
@@ -449,12 +350,7 @@ def show_report(row, As, grid, t):
 #     aspectr = pd.DataFrame(aspect_report, columns = ['body1', 'body2', 'shape', 'degree_type', 'degree'])
     return points,aspect_report
 
-
-
 # # Main Func
-
-
-
 def draw_chart(t, rows, tsp, images_stat):
     global local, image_original, grid_original
     local = images_stat
@@ -482,12 +378,6 @@ def draw_chart(t, rows, tsp, images_stat):
     print('...5')
     cv.imwrite('media/natal_chart.jpg', image)
     cv.imwrite('media/aspect_grid.jpg', grid_image)
-#     print(point)
-#     print(aspect)
     return point, aspect
 
-#     cv.imshow('Aspect_grid',grid_image)
-#     cv.imshow('Natal_Chart', image)
-#     cv.waitKey(0)
-#     cv.destroyAllWindows()
 

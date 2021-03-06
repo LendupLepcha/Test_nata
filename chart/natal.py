@@ -55,10 +55,8 @@ zodiac = pd.DataFrame(zodiacs)
 eph = load_file('media/de421.bsp')
 
 earth = eph['earth']
-# print(earth)
 coordinates = wgs84.latlon( 27.3314 , 88.6138)
 location = earth + coordinates
-# gg = gangtok.at(time_p)
 P= {}
 for i, j in zip(planets, Planet_names[:-1]):
     P[j] = eph[i]
@@ -71,7 +69,6 @@ ceres = sun + mpc.mpcorb_orbit(row_ceres, ts, GM_SUN)
 
 # # Draw intersect of a line and circle (Given angle from center)
 def intersect_circle(angle,r):
-#     m = 3.14
     signx = -1
     signy = -1
     quad = 1
@@ -92,19 +89,15 @@ def intersect_circle(angle,r):
         angle = angle - 90
         quad = 2
     m=math.tan(math.radians(angle))
-#     print(m)
     x = math.sqrt((r*r)/(1+(m*m)))
     y = m * x
     if(quad % 2 ==0):
         x, y = y, x
-#     print('x,y',x,y)
     xx = signx * math.floor(x)
     yy = signy * math.floor(y)
     return xx,yy
 
 def insert_image(imgA, p_name, x, y):
-    # local = 'static/'+p_name+'.jpg'
-    # obj = cv.imread(local, 0)
     obj = local[p_name]
     length, bredth = obj.shape
     len_half, bre_half = int(length/2), int(bredth/2)
@@ -120,43 +113,24 @@ def insert_image(imgA, p_name, x, y):
 
 # # Draw arrow pointing the angle location
 def locate_arrow(angle,image,p_name,inner=True):
-    
-#     p_name = 
     if (inner): # inner (True) means arrow from inside the circle
         r, r_b, r_a = 250, 232, 228
     else:
         r, r_b, r_a = 302, 320, 324
-#     x, y = intersect_circle(angle,r)
-
-    x, y = intersect_circle(angle, r) # for arrow head
-    # _clock
-#     x_base, y_base = intersect_circle(angle,r_b)
-    x_base, y_base = intersect_circle(angle, r_b) # for arrow base
-    # _clock
-    xa, ya = intersect_circle(angle, r_a) #  for text
-    # _clock
+    x, y = intersect_circle(angle, r)
+    x_base, y_base = intersect_circle(angle, r_b)
+    xa, ya = intersect_circle(angle, r_a)
     img = cv.arrowedLine(image, (x_base+349,349-y_base), (x+349,349-y), 0, 1, tipLength= .5)
-#     img = cv.putText(img,p_name[:2],(xa+349,349-ya), font, .3,(0),1,cv.LINE_AA);
-#     img = cv.rectangle(img, (xa+349-7,349-ya-7), (xa+349+7,349-ya+7), 0, 1)
     img = insert_image(image, p_name, xa+349, 349-ya)
     return img
 
 
 # # Read angles of planets
 def get_angles(y, m, d, h, mins, lat, lon):
-    # print('Enter Date and Time')
-    # y = int(input('Year: '))
-    # m = int(input('month: '))
-    # d = int(input('day: '))
-    # h = int(input('hour: '))
-    # mins = int(input('minute:'))
-    # sec = int(input('second: '))
     tx = ts.utc(y, m, d, h, mins)
     tsp = [ts.utc(y, m, d), ts.utc(y, m, d+1)]
     print('Date : ', tx.utc_jpl())
     print('Enter Location')
-    # lat = float(input('Latitude:'))
-    # lon = float(input('Longitude:'))
     coordinates = wgs84.latlon( lat, lon)
     location = earth + coordinates
     gg = location.at(tx)
@@ -164,21 +138,15 @@ def get_angles(y, m, d, h, mins, lat, lon):
     for i in Planet_names[:-1]:
         q = P[i]
         ra, dec, dist = gg.observe(q).apparent().ecliptic_latlon()
-#         row[i] = ra.hours * 360 / 24
         row[i] = dec.degrees
     ra, dec, distance = gg.observe(ceres).ecliptic_latlon()
-#     row['ceres'] = ra.hours *360 / 24
     row['ceres'] = dec.degrees
     rowpd = pd.DataFrame([row], columns = Planet_names)
-#     print(rowpd)
     return tx, rowpd, tsp;
 
 def check_row(degree, name, row):
     a = copy.deepcopy(row)
-#     i = list(Planet_names).index(name)
-#     r = a.pop(i)
-    n = list(Planet_names).index(name) 
-    #print(n)
+    n = list(Planet_names).index(name)
     a = a.drop(name)
     for j in range(n):
         if abs(degree-a[j])<2:
@@ -240,8 +208,6 @@ def draw_grid(row, grid, img2):
                     sname = 'opposition'
                 elif(gdata[0] == 0):
                     sname = 'conjunction'
-#                 sname = 'images/' + sname + '.jpg'
-#                 print(sname)
                 string = gdata[1].upper()+' '+str(int(round(gdata[2])))
                 img2 = insert_image(img2, sname, x+22+(j*45), y-27+(i*45))
                 cv.putText(img2,string,(x+12+(j*45), y-12+(i*45)), font, .3,(0),1,cv.LINE_AA);
@@ -256,12 +222,9 @@ def rising(time, tsp):
             rise_t = i
     astro = location.at(rise_t).observe(sun).apparent()
     alt, az , dist = astro.altaz()
-#     print('Altitude', alt)
-#     print('Azimuth',az)
     horizon = location.at(time).from_altaz(alt_degrees = alt.degrees, az_degrees = az.degrees, distance = Distance(au = 1.3) )
     lat, lon, distance = horizon.ecliptic_latlon()
     As = lon.degrees
-#     print(dist)
     return As
 
 
@@ -305,16 +268,8 @@ def show_report(row, As, grid, t):
             hangle = hangle - 360
         houses[i+1] = [langle, hangle]
     house = pd.DataFrame(houses)
-    # zodiac = pd.DataFrame(zodiacs)
-    planet.insert(0, "Ascendant", [As], True) 
-    # planet['Ascendant'] = As
+    planet.insert(0, "Ascendant", [As], True)
     points = []
-    # for zs in zodiac:
-    #     if(angle >= zodiac[j][0] and angle < zodiac[j][1]):
-    #             de = angle - zodiac[j][0]
-    #             zz = zs 
-    # points.append(['Ascendant', zz, de, 1, As])
-
     for i in planet:
         angle = planet[i][0]
         if angle>=360:
@@ -336,8 +291,7 @@ def show_report(row, As, grid, t):
                         break
         if( i == 'Ascendent'):
             h = 1
-        points.append([i, z, d, h, angle])  
-#     pointr = pd.DataFrame(points, columns=['point', 'zodiac', 'zodiac_longitude', 'house', 'RA'])
+        points.append([i, z, d, h, angle])
     aspect_report = []
     for i in range(len(Planet_names)):
         for j in range(i):
@@ -347,7 +301,6 @@ def show_report(row, As, grid, t):
                 else:
                     deg_type = 'Separating'
                 aspect_report.append([Planet_names[i], Planet_names[j], grid[i][j][0], deg_type, grid[i][j][2]])
-#     aspectr = pd.DataFrame(aspect_report, columns = ['body1', 'body2', 'shape', 'degree_type', 'degree'])
     return points,aspect_report
 
 # # Main Func
@@ -356,15 +309,11 @@ def draw_chart(t, rows, tsp, images_stat):
     local = images_stat
     image_original = images_stat['chart_frame_equal_house']
     grid_original = images_stat['aspect_grid_frame_withceres']
-#     t, rows, tsp = get_angles()
     row = rows.loc[0]
     print('...1')
     image = copy.deepcopy(image_original)
     grid_image=copy.deepcopy(grid_original)
-    
     inner_s = True
-    # print(Planet_names)
-    
     for i, j in zip(row, Planet_names) :
         inner_s = check_row(i, j, row)
         image = locate_arrow(i, image, p_name = j, inner = inner_s)
@@ -374,7 +323,7 @@ def draw_chart(t, rows, tsp, images_stat):
     grid = aspect_grid(row, Planet_names)
     grid_image = draw_grid(row, grid, grid_image)
     print('...4')
-    point, aspect = show_report(row, As, grid, t)  #As
+    point, aspect = show_report(row, As, grid, t)
     print('...5')
     cv.imwrite('media/natal_chart.jpg', image)
     cv.imwrite('media/aspect_grid.jpg', grid_image)

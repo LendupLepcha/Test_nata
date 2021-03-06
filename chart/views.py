@@ -6,14 +6,12 @@ from django.contrib.auth.decorators import login_required
 from . import natal as nt
 ts = nt.load.timescale()
 from django.contrib import messages 
-# from .models import Stat_Images
 import pickle
 np = nt.np
 cv = nt.cv
 file_to_read = open("media/images.pickle", "rb")
 images_stat = pickle.load(file_to_read)
 file_to_read.close()
-
 
 @login_required(login_url="/accounts/login/")
 def view_create(request):
@@ -25,7 +23,6 @@ def view_create(request):
             instance.name = request.user
             time = ts.utc(instance.year, instance.month, instance.day, instance.hour, instance.minute)
             instance.datetime = time.utc_jpl()
-            # instance.author = request.user
             check_inst = User_info.objects.filter(name=instance.name,datetime=instance.datetime,latitude=instance.latitude,longitude=instance.longitude)
             if check_inst.exists():
                 messages.error(request, "This data is already saved in database!!")
@@ -72,9 +69,7 @@ def view_create(request):
 
 @login_required(login_url="/accounts/login/")
 def view_show(request):
-    # ts = nt.load.timescale()
     if e_u != 0:
-       
         return render(request, 'chart/show.html', {'name':e_u.name,'aspect': aspect, 'point':point, 'time':time_e, 'lat':e_u.latitude, 'lon':e_u.longitude} )
     else:
          return HttpResponse('No e_u found')
@@ -88,7 +83,6 @@ def view_search(request):
     return render(request, 'chart/search.html', {'form':form})
 
 def view_search_results(request):
-    # print(result['name'])
     if request.method == 'POST':
         form = forms.Search_Input(request.POST)
         if form.is_valid():
@@ -100,22 +94,17 @@ def view_search_results(request):
                 int(form.data['sminute'])
             )
             sresult = {
-                # 'name' : form.data['sname'],
                 'time' : stime.utc_jpl(),
                 'latitude' : form.data['slatitude'],
                 'longitude' : form.data['slongitude']
             }
-            # ui = User_info.objects.filter(datetime = sresult['time'], latitude = sresult['latitude'], longitude = sresult['longitude'])
             asp = Aspects.objects.filter(datetime = sresult['time'], lat = sresult['latitude'], lon = sresult['longitude'])
             zod = Zodiac.objects.filter(datetime = sresult['time'], lat = sresult['latitude'], lon = sresult['longitude'])
             if asp.exists() and zod.exists():
-                # print('no time for that', sresult['time'])
                 return render(request, 'chart/search_results.html', { 'asp':asp, 'zod':zod, 'results':sresult})
                 
             else:
-                # print(sresult['time'])
                 messages.error(request, "NO DATA FOUND!!")
-                # return HttpResponse('No such input in database')
                 return redirect('chart:search')
     else:
         messages.error(request, "NO INPUT GIVEN!!")

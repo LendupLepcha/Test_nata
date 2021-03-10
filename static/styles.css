@@ -75,7 +75,7 @@ figcaption{
 }
 
 .wrapper, header{
-    max-width:1200px;
+    max-width:960px;
     margin:0 auto;
 }
 
@@ -155,9 +155,9 @@ a{
     font-size:1.2em;
     border-radius:4px;
     margin:10px 0;
-    position: relative;
+    /* position: relative;
     left: 50%;
-    transform: translate(-50%,30%);
+    transform: translate(-50%,30%); */
     cursor:pointer; 
 }
 .search-form{

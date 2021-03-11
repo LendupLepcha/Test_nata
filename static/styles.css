@@ -86,7 +86,7 @@ div.wrapper h1{
 }
 header{
     display:grid;
-    grid-template-columns:1fr 1fr;
+    grid-template-columns:1fr 2fr;
     padding:10px 0;
 }
 nav{
@@ -180,5 +180,22 @@ a{
     color:gray;
     margin-bottom:10px;
 }
+.thumb_search{
+    border-radius:30px;
+}
+.images a, .dash-link{
+    color:white;
+    border: 0;
+    padding:0;
+
+}
+.dash-link{
+    padding:10px;
+}
+header a:hover {
+  color: black ;
+  background-color: #cfc ;
+}
+
 
   

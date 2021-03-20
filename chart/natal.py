@@ -142,7 +142,7 @@ def get_angles(y, m, d, h, mins, lat, lon):
     ra, dec, distance = gg.observe(ceres).ecliptic_latlon()
     row['ceres'] = dec.degrees
     rowpd = pd.DataFrame([row], columns = Planet_names)
-    return tx, rowpd, tsp;
+    return tx, rowpd, tsp
 
 def check_row(degree, name, row):
     a = copy.deepcopy(row)

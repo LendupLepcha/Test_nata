@@ -20,7 +20,7 @@ def view_create(request):
         form = forms.TakeInput(request.POST, request.FILES)
         if form.is_valid():
             instance = form.save(commit=False)
-            instance.name = request.user
+            # instance.name = request.user
             time = ts.utc(instance.year, instance.month, instance.day, instance.hour, instance.minute)
             instance.datetime = time.utc_jpl()
             check_inst = User_info.objects.filter(name=instance.name,datetime=instance.datetime,latitude=instance.latitude,longitude=instance.longitude)

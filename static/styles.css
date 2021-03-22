@@ -111,15 +111,20 @@ nav button{
     padding:20px;
 }
 
-.site-form input{
+.site-form input, select{
     display:block;
+    width:250px;
     padding:5px;
 }
 .site-form label{
     display:block;
+    font-weight:bold;
     margin:10px 0 0 0;
+    font-family: Arial, Helvetica, sans-serif;
 }
-
+.user_name{
+    visibility:hidden;
+}
 
 a{
     border:1px solid #00dba0;

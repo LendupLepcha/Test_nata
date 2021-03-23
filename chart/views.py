@@ -4,6 +4,7 @@ from . import forms
 from .models import Zodiac, Aspects, User_info
 from django.contrib.auth.decorators import login_required
 from . import natal as nt
+from . import magnetics as mg
 ts = nt.load.timescale()
 from django.contrib import messages 
 import pickle
@@ -62,6 +63,8 @@ def view_create(request):
                     zod.house = i[3]
                     zod.RA = i[4]
                     zod.save()
+            mg.get_magnetic_data(e_u.latitude, e_u.longitude, e_u.year, e_u.month, e_u.day, e_u.hour, e_u.minute, e_u.entry_time, e_u.name, e_u.datetime)
+                
             return redirect('chart:show')
     else:
         form = forms.TakeInput()

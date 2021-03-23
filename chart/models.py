@@ -42,6 +42,20 @@ class User_info(models.Model):
     natal_chart = models.FileField(default='default.png', blank=True)
     aspect_grid = models.FileField(default='default.png', blank=True)
 
+class Magnetic_Data(models.Model):
+    entry_time = models.DateTimeField()
+    name = models.CharField(max_length=100, null= True, blank = True)
+    datetime = models.CharField(max_length=100)
+    lat = models.FloatField()
+    lon = models.FloatField()
+    X = models.FloatField()
+    Y = models.FloatField()
+    Z = models.FloatField()
+    F = models.FloatField()
+    area_code = models.CharField(max_length=10)
+    observatory = models.CharField(max_length=10)
+    graph = models.FileField(default='default.png', blank=True)
+
 class Stat_Images(models.Model):
     sun = models.FileField(default='default.png', blank=True)
     moon = models.FileField(default='default.png', blank=True)

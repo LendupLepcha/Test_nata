@@ -22,11 +22,11 @@ import io
 plt.style.use('fivethirtyeight')
 
 # PSQL connection
-connection = psycopg2.connect(user="postgres",
-                              password="@#bedrock$203",
-                              host="1.7.151.13",
-                              port="5432",
-                              database="cosmosis")
+# connection = psycopg2.connect(user="postgres",
+#                               password="@#bedrock$203",
+#                               host="1.7.151.13",
+#                               port="5432",
+#                               database="cosmosis")
 
 # web issues precaution
 def GET_UA():
@@ -143,6 +143,11 @@ def getData(year,month,day,hour,minute,code):
         
 # main Function
 def get_magnetic_data(latitude, longitude, year, month, day, hour, minute,  entry_time, name, e_datetime):
+    connection = psycopg2.connect(user="postgres",
+                            password="@#bedrock$203",
+                            host="1.7.151.13",
+                            port="5432",
+                            database="cosmosis")
     regions=getRegions(connection)
     oobs = [] 
     for region in regions:

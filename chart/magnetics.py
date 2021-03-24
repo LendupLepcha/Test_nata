@@ -66,7 +66,7 @@ def get_obs(oobs, lat, lon):
     code = ''
     cname = ''
     for i in oobs:
-        print(i)
+        # print(i)
         x, y = lon, lat
         x1, y1 = i[5], i[4]
         temp = math.sqrt((x-x1)**2 + (y-y1)**2)

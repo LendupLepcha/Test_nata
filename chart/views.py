@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from . import forms
-from .models import Zodiac, Aspects, User_info
+from .models import Zodiac, Aspects, User_info, Magnetic_Data
 from django.contrib.auth.decorators import login_required
 from . import natal as nt
 from . import magnetics as mg
@@ -77,7 +77,8 @@ def view_create(request):
 @login_required(login_url="/accounts/login/")
 def view_show(request):
     if e_u != 0:
-        return render(request, 'chart/show.html', {'name':e_u.name,'aspect': aspect, 'point':point, 'time':time_e, 'lat':e_u.latitude, 'lon':e_u.longitude} )
+        mags = Magnetic_Data.objects.get(entry_time = e_u.entry_time)
+        return render(request, 'chart/show.html', {'name':e_u.name,'aspect': aspect, 'point':point, 'time':time_e, 'lat':e_u.latitude, 'lon':e_u.longitude, 'mags':mags} )
     else:
          return HttpResponse('No e_u found')
 

@@ -108,7 +108,12 @@ def view_search_results(request):
             }
             asp = Aspects.objects.filter(datetime = sresult['time'], lat = sresult['latitude'], lon = sresult['longitude'])
             zod = Zodiac.objects.filter(datetime = sresult['time'], lat = sresult['latitude'], lon = sresult['longitude'])
-            mag = Magnetic_Data.objects.get(datetime = sresult['time'], lat = sresult['latitude'], lon = sresult['longitude'])
+            try:
+                mag = Magnetic_Data.objects.get(datetime = sresult['time'], lat = sresult['latitude'], lon = sresult['longitude'])
+            except Exception as err:
+                    print(err)
+                    messages.error(request, "NO DATA FOUND!!")
+                    return redirect('chart:search')
             if asp.exists() and zod.exists():
                 return render(request, 'chart/search_results.html', { 'asp':asp, 'zod':zod, 'mag':mag, 'results':sresult})
                 

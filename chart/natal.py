@@ -129,8 +129,8 @@ def locate_arrow(angle,image,p_name,inner=True):
 def get_angles(y, m, d, h, mins, lat, lon):
     tx = ts.utc(y, m, d, h, mins)
     tsp = [ts.utc(y, m, d), ts.utc(y, m, d+1)]
-    print('Date : ', tx.utc_jpl())
-    print('Enter Location')
+    # print('Date : ', tx.utc_jpl())
+    # print('Enter Location')
     coordinates = wgs84.latlon( lat, lon)
     location = earth + coordinates
     gg = location.at(tx)
@@ -310,21 +310,21 @@ def draw_chart(t, rows, tsp, images_stat):
     image_original = images_stat['chart_frame_equal_house']
     grid_original = images_stat['aspect_grid_frame_withceres']
     row = rows.loc[0]
-    print('...1')
+    # print('...1')
     image = copy.deepcopy(image_original)
     grid_image=copy.deepcopy(grid_original)
     inner_s = True
     for i, j in zip(row, Planet_names) :
         inner_s = check_row(i, j, row)
         image = locate_arrow(i, image, p_name = j, inner = inner_s)
-    print('...2')
+    # print('...2')
     As, image = houses(image, t, tsp)
-    print('...3')
+    # print('...3')
     grid = aspect_grid(row, Planet_names)
     grid_image = draw_grid(row, grid, grid_image)
-    print('...4')
+    # print('...4')
     point, aspect = show_report(row, As, grid, t)
-    print('...5')
+    # print('...5')
     cv.imwrite('media/natal_chart.jpg', image)
     cv.imwrite('media/aspect_grid.jpg', grid_image)
     return point, aspect

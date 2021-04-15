@@ -28,7 +28,7 @@ def view_create(request):
             # instance.name = request.user
             time = ts.utc(instance.year, instance.month, instance.day, instance.hour, instance.minute)
             instance.datetime = time.utc_jpl()
-            check_inst = User_info.objects.filter(name=instance.name,datetime=instance.datetime,latitude=instance.latitude,longitude=instance.longitude)
+            check_inst = User_info.objects.filter(datetime=instance.datetime,latitude=instance.latitude,longitude=instance.longitude)
             if check_inst.exists():
                 messages.error(request, "This data is already saved in database!!")
                 return redirect('chart:create')
